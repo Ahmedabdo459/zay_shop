@@ -10,8 +10,9 @@ function addToCart(name, price, image, description) {
         // Increase quantity if item exists
         existingItem.quantity++;
     } else {
-        // Add new item to cart
+        // Add new item to cart with unique ID
         cart.push({
+            id: `cart-item-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
             name: name,
             price: price,
             image: image,
@@ -27,7 +28,7 @@ function addToCart(name, price, image, description) {
     updateCartCount();
     
     // Show notification
-    showNotification('تم إضافة المنتج إلى السلة!');
+    showNotification('The product has been added to the cart!');
 }
 
 // Update cart count in navbar

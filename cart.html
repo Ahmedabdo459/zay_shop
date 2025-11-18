@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zay Shop - السلة</title>
+    <title>Zay Shop - Shopping Cart</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -46,17 +46,16 @@
     <!-- CART SECTION -->
     <section class="py-10 sm:py-14 md:py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            
-            <h2 class="text-3xl sm:text-4xl font-bold mb-8 sm:mb-10 text-center">سلة التسوق</h2>
+            <h2 class="text-3xl sm:text-4xl font-bold mb-8 sm:mb-10 text-center">Shopping Cart</h2>
 
             <!-- Cart Items Container -->
             <div id="cartItems" class="bg-white rounded-xl shadow-md p-6 mb-6">
                 <!-- Items will be dynamically inserted here -->
                 <div id="emptyCart" class="text-center py-12">
                     <i class="fa-solid fa-cart-shopping text-6xl text-gray-300 mb-4"></i>
-                    <p class="text-xl text-gray-500 mb-4">السلة فارغة</p>
+                    <p class="text-xl text-gray-500 mb-4"> The cart is empty</p>
                     <a href="shop.html" class="inline-block bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition">
-                        ابدأ التسوق
+                        Start Shopping
                     </a>
                 </div>
             </div>
@@ -64,15 +63,15 @@
             <!-- Cart Summary -->
             <div id="cartSummary" class="bg-white rounded-xl shadow-md p-6 hidden">
                 <div class="flex justify-between items-center mb-4">
-                    <span class="text-xl font-semibold">المجموع:</span>
+                    <span class="text-xl font-semibold">Total:</span>
                     <span id="totalPrice" class="text-2xl font-bold text-green-600">$0.00</span>
                 </div>
                 <div class="flex gap-4">
                     <a href="shop.html" class="flex-1 text-center bg-gray-200 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-300 transition">
-                        متابعة التسوق
+                        Continue Shopping
                     </a>
                     <button id="checkoutBtn" class="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition">
-                        إتمام الطلب
+                        Checkout
                     </button>
                 </div>
             </div>

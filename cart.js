@@ -1,6 +1,13 @@
 // Cart functionality
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+// Generate unique ID for cart items if not exists
+cart.forEach((item, index) => {
+    if (!item.id) {
+        item.id = `cart-item-${Date.now()}-${index}`;
+    }
+});
+
 // Update cart count in navbar
 function updateCartCount() {
     const cartCount = document.getElementById('cartCount');
@@ -37,28 +44,35 @@ function displayCart() {
         const itemTotal = item.price * item.quantity;
         total += itemTotal;
         
+        // Ensure item has an ID
+        if (!item.id) {
+            item.id = `cart-item-${Date.now()}-${index}`;
+        }
+        
         html += `
-            <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 p-4 border-b border-gray-200 last:border-0">
+            <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 p-4 sm:p-6 border-b border-gray-200 last:border-0">
                 <img src="${item.image}" alt="${item.name}" class="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-lg">
-                <div class="flex-1 text-center sm:text-right">
+                <div class="flex-1 text-center sm:text-left">
                     <h3 class="text-xl font-semibold mb-2">${item.name}</h3>
-                    <p class="text-gray-500 mb-2">${item.description}</p>
+                    <p class="text-gray-500 mb-2 text-sm">${item.description}</p>
                     <p class="text-green-600 font-bold text-lg">$${item.price.toFixed(2)}</p>
                 </div>
-                <div class="flex items-center gap-3">
-                    <button onclick="decreaseQuantity(${index})" class="bg-gray-200 hover:bg-gray-300 w-8 h-8 rounded flex items-center justify-center">
-                        <i class="fa-solid fa-minus text-sm"></i>
-                    </button>
-                    <span class="text-xl font-semibold w-12 text-center">${item.quantity}</span>
-                    <button onclick="increaseQuantity(${index})" class="bg-gray-200 hover:bg-gray-300 w-8 h-8 rounded flex items-center justify-center">
-                        <i class="fa-solid fa-plus text-sm"></i>
-                    </button>
-                </div>
-                <div class="text-center sm:text-left">
-                    <p class="text-xl font-bold text-green-600 mb-2">$${itemTotal.toFixed(2)}</p>
-                    <button onclick="removeFromCart(${index})" class="text-red-600 hover:text-red-700">
-                        <i class="fa-solid fa-trash"></i> حذف
-                    </button>
+                <div class="flex flex-col sm:flex-row items-center gap-4">
+                    <div class="flex items-center gap-3 bg-gray-100 rounded-lg p-2">
+                        <button onclick="decreaseQuantity('${item.id}')" class="bg-white hover:bg-gray-200 w-10 h-10 rounded-lg flex items-center justify-center shadow-sm transition-all duration-200 active:scale-95">
+                            <i class="fa-solid fa-minus text-gray-700"></i>
+                        </button>
+                        <span class="text-xl font-bold w-12 text-center text-gray-800">${item.quantity}</span>
+                        <button onclick="increaseQuantity('${item.id}')" class="bg-white hover:bg-gray-200 w-10 h-10 rounded-lg flex items-center justify-center shadow-sm transition-all duration-200 active:scale-95">
+                            <i class="fa-solid fa-plus text-gray-700"></i>
+                        </button>
+                    </div>
+                    <div class="text-center sm:text-left">
+                        <p class="text-xl font-bold text-green-600 mb-2">$${itemTotal.toFixed(2)}</p>
+                        <button onclick="removeFromCart('${item.id}')" class="text-red-600 hover:text-red-700 transition text-sm sm:text-base">
+                            <i class="fa-solid fa-trash"></i> Delete
+                        </button>
+                    </div>
                 </div>
             </div>
         `;
@@ -69,40 +83,52 @@ function displayCart() {
 }
 
 // Increase quantity
-function increaseQuantity(index) {
-    cart[index].quantity++;
-    localStorage.setItem('cart', JSON.stringify(cart));
-    displayCart();
-    updateCartCount();
+function increaseQuantity(itemId) {
+    const item = cart.find(item => item.id === itemId);
+    if (item) {
+        item.quantity++;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        displayCart();
+        updateCartCount();
+    }
 }
 
 // Decrease quantity
-function decreaseQuantity(index) {
-    if (cart[index].quantity > 1) {
-        cart[index].quantity--;
-    } else {
-        cart.splice(index, 1);
+function decreaseQuantity(itemId) {
+    const item = cart.find(item => item.id === itemId);
+    if (item) {
+        if (item.quantity > 1) {
+            item.quantity--;
+        } else {
+            const index = cart.findIndex(i => i.id === itemId);
+            if (index > -1) {
+                cart.splice(index, 1);
+            }
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        displayCart();
+        updateCartCount();
     }
-    localStorage.setItem('cart', JSON.stringify(cart));
-    displayCart();
-    updateCartCount();
 }
 
 // Remove from cart
-function removeFromCart(index) {
-    cart.splice(index, 1);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    displayCart();
-    updateCartCount();
+function removeFromCart(itemId) {
+    const index = cart.findIndex(item => item.id === itemId);
+    if (index > -1) {
+        cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        displayCart();
+        updateCartCount();
+    }
 }
 
 // Checkout
 document.getElementById('checkoutBtn')?.addEventListener('click', function() {
     if (cart.length === 0) {
-        alert('السلة فارغة');
+        alert("Cart is empty");
         return;
     }
-    alert('شكراً لك! سيتم إتمام الطلب قريباً.');
+    alert('Thank you! The order will be completed soon.');
     cart = [];
     localStorage.setItem('cart', JSON.stringify(cart));
     displayCart();
