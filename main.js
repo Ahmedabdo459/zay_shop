@@ -1,7 +1,6 @@
-// navbar
-const menuBtn = document.getElementById("menuBtn");
-const navLinks = document.querySelector("nav ul");
+const btn = document.getElementById("menuBtn");
+    const menu = document.getElementById("mobileMenu");
 
-menuBtn.addEventListener("click", () => {
-    navLinks.classList.toggle("hidden");
-});
+    btn.addEventListener("click", () => {
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+    });
