@@ -18,115 +18,55 @@
   <body class="font-sans">
     <!-- NAVBAR -->
     <nav
-      id="mainNav"
-      class="w-full bg-white text-black px-4 sm:px-6 md:px-10 py-4 sm:py-6 md:py-8 flex justify-between items-center relative sticky top-0 left-0 z-50 transition-shadow duration-300"
-    >
-      <h1
-        class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-green-600"
-      >
-        Zay
-      </h1>
+  id="mainNav"
+  class="w-full bg-white text-black px-4 sm:px-6 md:px-10 py-4 flex justify-between items-center sticky top-0 left-0 z-50 shadow-sm"
+>
+  <h1 class="text-3xl font-bold text-green-600">
+    Zay
+  </h1>
 
-      <ul
-        class="hidden md:flex gap-8 lg:gap-16 xl:gap-32 text-lg lg:text-xl xl:text-2xl"
-      >
-        <li>
-          <a
-            href="#Home"
-            class="nav-link hover:text-green-600 transition active"
-            >Home</a
-          >
-        </li>
-        <li>
-          <a href="#about" class="nav-link hover:text-green-600 transition"
-            >About</a
-          >
-        </li>
-        <li>
-          <a href="shop.html" class="nav-link hover:text-green-600 transition"
-            >Shop</a
-          >
-        </li>
-        <li>
-          <a href="#contact" class="nav-link hover:text-green-600 transition"
-            >Contact</a
-          >
-        </li>
-      </ul>
+  <!-- Desktop Menu -->
+  <ul class="hidden md:flex gap-10 text-lg">
+    <li><a href="#Home" class="nav-link hover:text-green-600 transition">Home</a></li>
+    <li><a href="#about" class="nav-link hover:text-green-600 transition">About</a></li>
+    <li><a href="shop.html" class="nav-link hover:text-green-600 transition">Shop</a></li>
+    <li><a href="#contact" class="nav-link hover:text-green-600 transition">Contact</a></li>
+  </ul>
 
-      <!-- Mobile Menu -->
-      <ul
-        id="mobileMenu"
-        class="hidden absolute top-full left-0 w-full bg-white shadow-lg flex flex-col gap-4 p-6 z-50 md:hidden"
-      >
-        <li>
-          <a
-            href="#Home"
-            class="nav-link hover:text-green-600 transition text-lg"
-            >Home</a
-          >
-        </li>
-        <li>
-          <a
-            href="#about"
-            class="nav-link hover:text-green-600 transition text-lg"
-            >About</a
-          >
-        </li>
-        <li>
-          <a
-            href="shop.html"
-            class="nav-link hover:text-green-600 transition text-lg"
-            >Shop</a
-          >
-        </li>
-        <li>
-          <a
-            href="#contact"
-            class="nav-link hover:text-green-600 transition text-lg"
-            >Contact</a
-          >
-        </li>
-      </ul>
+  <!-- Icons + Menu Button -->
+  <div class="flex items-center gap-5 text-xl">
+    <button data-action="open-search" class="hidden sm:inline hover:text-green-600">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
 
-      <div
-        class="text-lg sm:text-xl md:text-2xl flex gap-3 sm:gap-4 md:gap-5 items-center"
-      >
-        <button
-          class="hidden sm:inline text-xl hover:text-green-600 transition"
-          data-action="open-search"
-          aria-label="Open search"
-        >
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-        <div class="relative w-fit">
-          <span
-            ><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a
-          ></span>
-          <span
-            id="cartCount"
-            class="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-4 h-4 sm:w-5 sm:h-5 flex justify-center items-center text-xs"
-            >0</span
-          >
-        </div>
-        <div class="relative w-fit">
-          <span
-            ><a href="user.html" aria-label="User profile"
-              ><i class="fa-solid fa-user"></i></a
-          ></span>
-        </div>
-        <button
-          class="sm:hidden text-xl hover:text-green-600 transition"
-          data-action="open-search"
-          aria-label="Open search"
-        >
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-        <button id="menuBtn" class="md:hidden text-2xl sm:text-3xl ml-2">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-      </div>
-    </nav>
+    <!-- Cart -->
+    <div class="relative">
+      <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+      <span id="cartCount"
+        class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex justify-center items-center">
+        0
+      </span>
+    </div>
+
+    <!-- User -->
+    <a href="user.html"><i class="fa-solid fa-user"></i></a>
+
+    <!-- Menu Button -->
+    <button id="menuBtn" class="md:hidden text-3xl">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+</nav>
+<ul
+  id="mobileMenu"
+  class="hidden flex-col gap-4 p-6 bg-white shadow-lg absolute top-full left-0 w-full z-40 md:hidden"
+>
+  <li><a href="#Home" class="hover:text-green-600 text-lg">Home</a></li>
+  <li><a href="#about" class="hover:text-green-600 text-lg">About</a></li>
+  <li><a href="shop.html" class="hover:text-green-600 text-lg">Shop</a></li>
+  <li><a href="#contact" class="hover:text-green-600 text-lg">Contact</a></li>
+</ul>
+
 
     <!-- HERO SECTION -->
     <section
@@ -804,7 +744,7 @@
       </div>
     </footer>
 
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/shop.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/shop.js"></script>
   </body>
 </html>
